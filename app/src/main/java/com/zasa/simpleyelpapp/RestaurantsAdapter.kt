@@ -1,14 +1,14 @@
 package com.zasa.simpleyelpapp
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_restaurant.view.*
 
-class RestaurantsAdapter(val context: MainActivity, val restaurants: List<YelpRestaurant>) :
+class RestaurantsAdapter(val context: Context, val restaurants: List<YelpRestaurant>) :
     RecyclerView.Adapter<RestaurantsAdapter.ViewHolder>() {
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_restaurant, parent, false))
@@ -25,6 +25,12 @@ class RestaurantsAdapter(val context: MainActivity, val restaurants: List<YelpRe
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         fun bind(restaurant: YelpRestaurant) {
             itemView.tvName.text = restaurant.name
+            itemView.ratingBar.rating = restaurant.rating.toFloat()
+            itemView.tvNumReviews.text = "${restaurant.numReviews} Reviews"
+//            itemView.tvAddress.text = restaurant.yelpLocation.address
+//            itemView.tvCategory.text = restaurant.category[0].title
+            itemView.tvDistance.text = restaurant.displayDistance()
+            itemView.tvPrice.text = restaurant.price
         }
 
     }
