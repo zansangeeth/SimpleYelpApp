@@ -3,6 +3,8 @@ package com.zasa.simpleyelpapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,6 +19,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val restaurants = mutableListOf<YelpRestaurant>()
+        val adapter = RestaurantsAdapter(this, restaurants)
+        rvRestaurants.adapter = adapter
+        rvRestaurants.layoutManager = LinearLayoutManager(this)
+
 
         val retrofit =
             Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create())
