@@ -12,5 +12,12 @@ data class YelpData(
 )
 
 data class YelpRestaurant(
-    @SerializedName("name") val name : String
+
+    val name : String,
+    val rating : Double,
+    val price : String,
+    @SerializedName("review_count") val numReviews : Int,
+    @SerializedName("distance") val distanceInMeters : Double,
+    @SerializedName("image_url") val imageUrl : String
+
 )
