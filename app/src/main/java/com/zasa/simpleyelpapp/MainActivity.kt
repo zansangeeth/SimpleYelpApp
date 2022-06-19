@@ -34,6 +34,13 @@ class MainActivity : AppCompatActivity() {
         yelpService.searchRestaurants("Bearer $API_KEY","Avocado Toast", "New York").enqueue(object : Callback<YelpData> {
             override fun onResponse(call: Call<YelpData>, response: Response<YelpData>) {
                 Log.i(TAG, "onResponse $response")
+                val body = response.body()
+                if (body == null){
+                    Log.w(TAG, "did not receive valid response from the Yelp API..")
+                    return
+                }
+                restaurants.addAll(body.restaurants)
+                adapter.notifyDataSetChanged()
             }
 
             override fun onFailure(call: Call<YelpData>, t: Throwable) {
